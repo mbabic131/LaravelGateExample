@@ -6,6 +6,7 @@ use Auth;
 use Gate;
 use App\Post;
 use Illuminate\Http\Request;
+use App\Events\OrderShipped;
 use App\Http\Requests\StorePost as StorePostRequest;
 use App\Http\Requests\UpdaPost as UpdatePostRequest;
 
@@ -19,6 +20,7 @@ class PostController extends Controller
 
     public function create()
     {
+        event(new OrderShipped(Auth::user()));
         return view('posts.create');
     }
 
